@@ -2,6 +2,9 @@ name: CIIntegration
 on:
  pull_request:
     branches: [master,develop]
+  
+ push:
+    branches: [master,develop]
 
 jobs:
   build:
@@ -13,6 +16,15 @@ jobs:
          with: 
           node-version: "12.x"
        - run: npm ci
-       - run: npm run format:check
+       - run: npm run format:write
          env:
           CI: true
+       - name: Build Project
+         if: github.event_name == 'push'
+         run: npm run build
+       - name: Deploy staging
+         if: github.event_name == 'push'
+         run: npx surge --project ./build --domain silent-apparatus.surge.sh
+         env: 
+           SURGE_LOGIN: {{ secrets.SURGE_LOGIN }}
+           SURGE_TOKEN: {{ secrets.SURGE_TOKEN }}
