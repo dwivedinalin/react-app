@@ -34,14 +34,14 @@ jobs:
            SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
            SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
 
-       - uses: actions/checkout@v2
-       - name: Set up JDK 1.8
-         uses: actions/setup-java@v1
-         with:
-          java-version: 1.8   
+      #  - uses: actions/checkout@v2
+      #  - name: Set up JDK 1.8
+      #    uses: actions/setup-java@v1
+      #    with:
+      #     java-version: 1.8   
  
-       - uses: https://github.com/dwivedinalin/serenity-cucumber-nalin 
-       - name: Run automated test of Selenium
-         run: mvn clean verify
+      #  - uses: https://github.com/dwivedinalin/serenity-cucumber-nalin 
+      #  - name: Run automated test of Selenium
+      #    run: mvn clean verify
          
              
