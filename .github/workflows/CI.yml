@@ -39,9 +39,9 @@ jobs:
          uses: actions/setup-java@v1
          with:
           java-version: 1.8   
-  
+ 
+       - uses: dwivedinalin/serenity-cucumber-nalin   
        - name: Run automated test of Selenium
-         uses: dwivedinalin/serenity-cucumber-nalin
          run: mvn clean verify
          
              
