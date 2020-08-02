@@ -16,7 +16,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write \"**/*.{js,jsx,yml,yaml,json,css,scss,md}\"",
-    "lint": "eslint.js"
+    "lint": "./node_modules/.bin/eslint ."
   },
   "eslintConfig": {
     "extends": "react-app"
