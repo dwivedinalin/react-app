@@ -1,20 +1,31 @@
-name: CI_Integration
+name: CIIntegration
 on:
  pull_request:
-    branches: [develop]
+    branches: [master,develop]
+  
+ push:
+    branches: [master,develop]
 
 jobs:
   build:
      runs-on: ubuntu-latest
      steps:
-       - uses: action/checkout@v2
+       - uses: actions/checkout@v2
        - name: Uses node version
          uses: actions/setup-node@v1
          with: 
           node-version: "12.x"
        - run: npm ci
-       - run: npm run format:check
+      #  - run: npm run format:check
+       - run: npm test   
          env:
           CI: true
-
-       
+       - name: Build Project
+         if: github.event_name == 'push'
+         run: npm run build
+       - name: Deploy staging
+         if: github.event_name == 'push'
+         run: npx surge --project ./build --domain silent-apparatus.surge.sh
+         env: 
+           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
